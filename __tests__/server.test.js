@@ -63,5 +63,31 @@ describe ('SERVERTEST', ()=>{
     expect(response).toBeTruthy();
 
   });
+
+
+  it('handles invalid req', async () => {
+    const response = await mockRequest.get('/oops');
+    expect(response.status).toEqual(404);
+  });
+
+  it('handles error', async ()=> {
+    const response = await mockRequest.get('/bad');
+
+    expect(response.status).toEqual(500);
+    expect(response.text).toBeTruthy();
+  });
+
+  it ('deletes', async()=>{
+    const response = await mockRequest.post('/teacher').send({
+      name: 'Spiderman',
+      password: '123',
+      subject: 'science',
+    });
+
+    const response2 = await mockRequest.delete('/teacher/:name=Spiderman');
+
+    expect(response.body.name).toBe('Spiderman');
+    expect(response2.body).toStrictEqual({});
+  });
   
 });

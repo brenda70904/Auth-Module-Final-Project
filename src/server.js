@@ -57,6 +57,16 @@ app.post('/student', async(req,res,next)=>{
   }
 });
 
+app.delete('/teacher/:name', async(req,res,next)=> {
+  try {
+    req.status(200).destroy(req.body);
+  } catch (error) {
+    next(error);
+    
+  }
+
+});
+
 
 
 // app.post('/teacher', async(req,res,next)=>{
@@ -67,9 +77,9 @@ app.post('/student', async(req,res,next)=>{
 //     next(error);
 //   }
 // });
-
+app.get('/bad',intError);
 app.use(notFound);
-app.use(intError);
+
 
 
 
