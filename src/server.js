@@ -3,6 +3,7 @@
 const cors = require('cors');
 const express = require('express');
 require('dotenv').config();
+const {teacher} = require('../src/models/index');
 
 const app = express();
 app.use(cors());
@@ -16,6 +17,38 @@ app.get('/', async(req,res,next)=>{
     next(error);
   }
 });
+
+
+
+app.get('/teacher', async(req,res,next)=>{
+  try {
+    res.status(200).send();
+    
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get('/student', async(req,res,next)=>{
+  try {
+    res.status(200).send();
+    
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+// app.post('/teacher', async(req,res,next)=>{
+//   try {
+//     res.status(201).send(teacher);
+    
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 
 
 

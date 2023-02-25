@@ -9,12 +9,16 @@
 'use strict';
 
 module.exports = (sequelizeDatabase, DataTypes) => {
-  return sequelizeDatabase.define('user', {
-    username: {
+  return sequelizeDatabase.define('teacher', {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    subject: {
       type: DataTypes.STRING,
       allowNull: false,
     },
