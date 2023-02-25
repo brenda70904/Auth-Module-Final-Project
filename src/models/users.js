@@ -1,19 +1,22 @@
 'use strict';
 
-const bcrypt = require('bcrypt');
-const jwt = require("jsonwebtoken");
-const { ENUM } = require('sequelize');
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+
 
 // const secret = process.env.SECRET;
 
-const userModel = (sequelize, DataType) => {
-  const model = sequelize.define(
-    'user', {
-    username: { type: DataType.STRING, required: ture },
-    password: { type: DataType.STRING, required: true },
-    role: { type: DataType.ENUM('user', 'teacher', 'supervisor', 'admin'), required:true, defaultValue:'user'}
-  }
-  )
-}
+'use strict';
 
-module.exports = userModel;
+module.exports = (sequelizeDatabase, DataTypes) => {
+  return sequelizeDatabase.define('user', {
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  });
+};
