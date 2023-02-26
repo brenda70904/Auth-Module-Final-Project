@@ -18,6 +18,6 @@ Router.post('/signup', async (req, res, next)=>{
   try{
     let record = await userModel(req.body);
   }catch(e){
-
+    console.log(e.message);
   }
-})
+});
