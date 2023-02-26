@@ -27,22 +27,18 @@ describe ('SERVERTEST', ()=>{
   it('creates a teacher', async () => {
     const response = await mockRequest.post('/teacher').send({
       name: 'Spiderman',
-      password: '123',
-      subject: 'science',
+      email: '123',
+
     });
     const responseTwo = await mockRequest.post('/teacher').send({
       name: 'Captain Marvel',
-      password: '321',
-      subject: 'social studies',
+      email: '321',
     });
 
     expect(response.body.name).toEqual('Spiderman');
     expect(responseTwo.body.name).toEqual('Captain Marvel');
-    expect(response.body.password).toEqual('123');
-    expect(responseTwo.body.password).toEqual('321');
-    expect(response.body.subject).toEqual('science');
-    expect(responseTwo.body.subject).toEqual('social studies');
-
+    expect(response.body.email).toEqual('123');
+    expect(responseTwo.body.email).toEqual('321');
   });
 
 
@@ -53,6 +49,7 @@ describe ('SERVERTEST', ()=>{
 
     expect(response.status).toBe(200);
     expect(response).toBeTruthy();
+    expect(response.length).toBeGreaterThan(0);
 
   });
 
@@ -61,6 +58,7 @@ describe ('SERVERTEST', ()=>{
 
     expect(response.status).toBe(200);
     expect(response).toBeTruthy();
+    expect(response.length).toBeGreaterThan(0);
 
   });
 
