@@ -40,7 +40,7 @@ const Student = sequelize.define('Student', {
 // Create the tables in the database
 sequelize.sync();
 
-const teacherModel = require('./models/teacherModel');
+
 
 
 const app = express();
@@ -54,9 +54,9 @@ app.get('/', async (req,res,next)=>{
 });
 
 // Routes for handling CRUD operations for teachers
-app.get('/teacher', async (req, res, next) => {
 
-app.get('/', async (req, res, next) => {
+
+app.get('/teacher', async (req, res, next) => {
 
   try {
     const teachers = await Teacher.findAll();
@@ -194,5 +194,4 @@ module.exports = {
   start: (port) => {
     app.listen(port, () => console.log(`listening on ${port}`));
   },
-
-};
+}; 
