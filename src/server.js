@@ -5,6 +5,7 @@ const express = require('express');
 require('dotenv').config();
 const notFound = require('./errorHandlers/404.js');
 const intError = require('./errorHandlers/500.js');
+
 const { Sequelize, DataTypes } = require('sequelize');
 
 // Create a Sequelize instance
@@ -39,9 +40,13 @@ const Student = sequelize.define('Student', {
 // Create the tables in the database
 sequelize.sync();
 
+const teacherModel = require('./models/teacherModel');
+
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 
 
 app.get('/', async (req,res,next)=>{
@@ -50,6 +55,9 @@ app.get('/', async (req,res,next)=>{
 
 // Routes for handling CRUD operations for teachers
 app.get('/teacher', async (req, res, next) => {
+
+app.get('/', async (req, res, next) => {
+
   try {
     const teachers = await Teacher.findAll();
     res.status(200).send(teachers);
@@ -67,6 +75,7 @@ app.post('/teacher', async (req, res, next) => {
   }
 });
 
+
 app.get('/teacher/:id', async (req, res, next) => {
   try {
     const teacher = await Teacher.findByPk(req.params.id);
@@ -80,6 +89,7 @@ app.get('/teacher/:id', async (req, res, next) => {
   }
 });
 
+
 app.put('/teacher/:id', async (req, res, next) => {
   try {
     const teacher = await Teacher.findByPk(req.params.id);
@@ -91,8 +101,9 @@ app.put('/teacher/:id', async (req, res, next) => {
     }
   } catch (error) {
     next(error);
-  }
+  };
 });
+
 
 app.delete('/teacher/:id', async (req, res, next) => {
   try {
@@ -154,6 +165,7 @@ app.put('/student/:id', async (req, res, next) => {
     next(error);
   }
 });
+
 
 app.delete('/student/:id', async (req, res, next) => {
   try {
