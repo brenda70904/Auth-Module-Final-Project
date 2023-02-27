@@ -4,14 +4,15 @@ const cors = require('cors');
 const express = require('express');
 require('dotenv').config();
 const notFound = require('./errorHandlers/404.js');
-const intError =require('./errorHandlers/500.js');
+const intError = require('./errorHandlers/500.js');
+const teacherModel = require('./models/teacherModel');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 
-app.get('/', async(req,res,next)=>{
+app.get('/', async (req, res, next) => {
   try {
     res.status(200).send('hello traveler');
   } catch (error) {
@@ -20,64 +21,89 @@ app.get('/', async(req,res,next)=>{
 });
 
 
-
-app.get('/teacher', async(req,res,next)=>{
+// get
+app.get('/teacher', async (req, res, next) => {
   try {
-    res.status(200).send();
-    
+    let record = await req.body;
+    res.status(200).send(record);
   } catch (error) {
     next(error);
   }
 });
 
-app.get('/student', async(req,res,next)=>{
+app.get('/student', async (req, res, next) => {
   try {
-    res.status(200).send();
-    
+    let record = await req.body;
+    res.status(200).send(record);
   } catch (error) {
     next(error);
-  }
+  };
 });
 
-app.post('/teacher', async(req,res,next)=>{
-  try {
-    res.status(200).send(req.body);
-  } catch (error) {
-    next(error);
-    
-  }
-});
-
-app.post('/student', async(req,res,next)=>{
+// create
+app.post('/teacher', async (req, res, next) => {
   try {
     res.status(200).send(req.body);
   } catch (error) {
     next(error);
-    
-  }
+  };
 });
 
-app.delete('/teacher/:name', async(req,res,next)=> {
+app.post('/student', async (req, res, next) => {
+  try {
+    res.status(200).send(req.body);
+  } catch (error) {
+    next(error);
+  };
+});
+
+//update
+app.patch('/teacher/:name', async (req, res, next) => {
+  try {
+    const contant = await JSON.stringify(req.body);
+    res.status(201).send(contant);
+  } catch (error) {
+    next(error);
+  };
+});
+
+app.patch('/student/:name', async (req, res, next) => {
+  try {
+    const contant = await JSON.stringify(req.body);
+    res.status(201).send(contant);
+  } catch (error) {
+    next(error);
+  };
+});
+
+
+// delete 
+app.delete('/teacher/:name', async (req, res, next) => {
   try {
     req.status(200).destroy(req.body);
   } catch (error) {
     next(error);
-    
-  }
-
+  };
 });
 
+app.delete('/student/:name', async (req, res, next) => {
+  try {
+    req.status(200).destroy(req.body);
+  } catch (error) {
+    next(error);
+  };
+});
 
 
 // app.post('/teacher', async(req,res,next)=>{
 //   try {
 //     res.status(201).send(teacher);
-    
+
 //   } catch (error) {
 //     next(error);
 //   }
 // });
-app.get('/bad',intError);
+app.get('/bad', intError);
 app.use(notFound);
 
 

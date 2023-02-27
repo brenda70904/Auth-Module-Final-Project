@@ -10,6 +10,11 @@
 
 module.exports = (sequelizeDatabase, DataTypes) => {
   return sequelizeDatabase.define('teacher', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      // primaryKey: true
+  },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -20,7 +25,11 @@ module.exports = (sequelizeDatabase, DataTypes) => {
     },
     subject: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
+    // role: {
+    //   type:ENUM("parent, teacher, manager, admin");
+    //   allowNull
+    // }
     },
   });
 };
